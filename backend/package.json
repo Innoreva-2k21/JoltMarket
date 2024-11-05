@@ -1,7 +1,7 @@
 {
-  "name": "mankevichar",
+  "name": "JoltMarket",
   "version": "1.0.0",
-  "description": "A dedicated project for diary writers ",
+  "description": "solution of selling old products ",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
