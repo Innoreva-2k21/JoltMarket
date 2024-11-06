@@ -2,6 +2,8 @@ require("dotenv").config()
 require("./config/database").connect()
 const User=require('./model/user')
 const Product=require('./model/product')
+const cors = require('cors'); // Import cors
+
 const express = require('express')
 const jwt=require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
@@ -9,7 +11,9 @@ const cookieParser=require('cookie-parser')
 // custom middleware
 const auth = require("./middleware/auth")
 const app = express()
-// to allow json format data 
+// to allow json format data
+app.use(cors());
+app.use(express.json());
 app.use(express.json())
 // to get data from forms
 app.use(express.urlencoded({ extended: true }))

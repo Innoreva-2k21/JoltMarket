@@ -8,15 +8,18 @@ const upload = require('../middleware/multer'); // Adjust the path as needed
 
 
 // Get all journal entries
-router.get('/entries', auth, productController.getAllEntries);
+router.get('/entries',productController.getAllEntries);
+router.post('/getEmail',productController.getEntriesByEmail);
 
 // Create a new journal entry (with image upload) initially entries
-router.post('/entries', auth, upload.single('image'), productController.createEntry);
+router.post('/create', upload.single('image'), productController.createEntry); 
+router.post('/Update',upload.single('image'),productController.updateEntry);
 
-// Update a journal entry (with image upload)
-router.put('/entries/:id', auth, upload.single('image'), productController.updateEntry);
+// // Update a journal entry (with image upload)
+// router.put('/entries/:id', auth, upload.single('image'), productController.updateEntry);
 
-// Delete a journal entry
-router.delete('/entries/:id', auth, productController.deleteEntry);
+// // Delete a journal entry
+router.delete('/delete/:id', productController.deleteProduct);
+router.post('/getId', productController.getEntryById);
 
 module.exports = router;
