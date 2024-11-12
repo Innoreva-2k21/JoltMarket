@@ -18,13 +18,7 @@ const Navbar = ({onLogout }) => {
           </div>
 
         {/* Menu for Large Screens */}
-        <div className="hidden md:flex space-x-8">
-          <NavLink 
-            to="/" 
-            className={getNavLinkClass} 
-          >
-            Home
-          </NavLink>
+        <div className="hidden md:flex space-x-10">
           <NavLink 
             to="/Byer" 
             className={getNavLinkClass}
@@ -78,12 +72,6 @@ const Navbar = ({onLogout }) => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden flex flex-col px-6 py-4 space-y-2">
-          <NavLink 
-            to="/" 
-            className={getNavLinkClass}
-          >
-            Home
-          </NavLink>
           <NavLink 
             to="/Byer" 
             className={getNavLinkClass}

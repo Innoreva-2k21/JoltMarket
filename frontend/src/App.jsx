@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Update from './Pages/Update/Update';
@@ -53,10 +53,11 @@ function App() {
     setUser(null);
     localStorage.removeItem('user');
   };
-
+  const location = useLocation();
+  const showNavbar = user && location.pathname !== '/';
   return (
     <div className='bg-[#f4f4fb]'>
-      {user ? (<Navbar onLogout={handleLogout}></Navbar>) : null}
+      {showNavbar && <Navbar onLogout={handleLogout} />}
       <Routes>
         {user ? (
          <>
