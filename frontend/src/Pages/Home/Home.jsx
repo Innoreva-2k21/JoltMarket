@@ -1,3 +1,4 @@
+import { div } from 'framer-motion/client';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,17 +6,19 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <h1>Welcome to My eCommerce Store</h1>
-      <p>Select an option to get started:</p>
+    <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center'}} className='flex flex-col items-center justify-center h-screen gap-4'>
+      <div className='w-72'>
+      <img src="jolt_logo.png" alt="logo"  className='w-full object-contain object-center'/>
+      </div>
+      <p className='text-slate-700 font-medium text-lg'>Select an option to get started:</p>
       
-      <div style={{ display: 'flex', gap: '40px', marginTop: '20px' }}>
+      <div className='flex gap-16 mt-5'>
         {/* Buy Button */}
         <button 
           style={{
-            padding: '20px 40px',
+            padding: '20px 50px',
             fontSize: '20px',
-            backgroundColor: '#4CAF50',
+            backgroundColor: '#3b1c80',
             color: 'white',
             border: 'none',
             borderRadius: '10px',
@@ -33,9 +36,9 @@ function Home() {
         {/* Sell Button */}
         <button 
           style={{
-            padding: '20px 40px',
+            padding: '20px 50px',
             fontSize: '20px',
-            backgroundColor: '#FF5733',
+            backgroundColor: '#3b1c80',
             color: 'white',
             border: 'none',
             borderRadius: '10px',

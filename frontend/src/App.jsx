@@ -9,6 +9,7 @@ import Seller from './Pages/Seller/Seller';
 import { auth } from './firebase/firebase';
 import './App.css';
 import Cart from './Pages/MyCart/Cart';
+import Navbar from './Components/Navbar'
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -54,7 +55,8 @@ function App() {
   };
 
   return (
-    <div>
+    <div className='bg-[#f4f4fb]'>
+      {user ? (<Navbar onLogout={handleLogout}></Navbar>) : null}
       <Routes>
         {user ? (
          <>

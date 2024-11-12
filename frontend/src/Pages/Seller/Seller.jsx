@@ -124,55 +124,31 @@ function Seller() {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-      <h1 style={{
-        fontSize: '2.5em',
-        color: '#FF5733',
-        marginBottom: '20px',
-        animation: 'glow 1.5s ease-in-out infinite alternate',
-      }}>
+      <div class="p-5 font-sans text-center max-w-lg mx-auto">
+
+      <h1 className='font-medium text-3xl mb-5 text-slate-700'>
         List Your Product for Sale
       </h1>
 
       {errorMessage && <div style={{ color: 'red', marginBottom: '10px' }}>{errorMessage}</div>}
 
-      <form onSubmit={handleSubmit} style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '10px',
-        backgroundColor: '#f9f9f9',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-      }}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-5 border border-gray-300 rounded-lg bg-gray-50 shadow-md">
+
         {/* Form Fields */}
         <input
-          type="text"
-          placeholder="Product Name"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-          }}
-        />
+  type="text"
+  placeholder="Product Name"
+  value={productName}
+  onChange={(e) => setProductName(e.target.value)}
+  class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+/>
 
         <input
           type="text"
           placeholder="Price"
           value={price}
           onChange={(e) => setProductPrice(e.target.value)}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-          }}
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
         />
 
         <input
@@ -180,25 +156,13 @@ function Seller() {
           placeholder="Product Category"
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-          }}
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
         />
 
         <input
           type="file"
           onChange={(e) => setProductImage(e.target.files[0])}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-          }}
+class="p-3 text-base rounded-lg border file:bg-gray-200 file:border-2 file:text-gray-400 file:rounded-md file:border-gray-300 border-gray-300 transition-transform duration-200 bg-gray-200"
         />
 
         <textarea
@@ -206,14 +170,7 @@ function Seller() {
           rows="4"
           value={productDetails}
           onChange={(e) => setProductDetails(e.target.value)}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-            resize: 'vertical',
-          }}
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
         />
 
         <input
@@ -221,20 +178,14 @@ function Seller() {
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          style={{
-            padding: '12px',
-            fontSize: '1em',
-            borderRadius: '8px',
-            border: '1px solid #ddd',
-            transition: 'transform 0.2s',
-          }}
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
         />
 
         <button type="submit" style={{
           padding: '15px',
           fontSize: '1em',
           color: 'white',
-          backgroundColor: '#4CAF50',
+          backgroundColor: '#3b1c80',
           border: 'none',
           borderRadius: '8px',
           cursor: 'pointer',
@@ -244,7 +195,7 @@ function Seller() {
         </button>
       </form>
 
-      <button onClick={handleLogout} style={{
+      {/* <button onClick={handleLogout} style={{
         padding: '15px',
         fontSize: '1em',
         color: 'white',
@@ -256,47 +207,60 @@ function Seller() {
         transition: 'background-color 0.3s, transform 0.3s',
       }}>
         Logout
-      </button>
+      </button> */}
 
-      <h2 style={{ marginTop: '40px' }}>Your Products</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <h1 className='font-medium text-3xl mb-5 mt-5 text-slate-700'>Your Products</h1>
+      <div className='flex flex-col items-center justify-center gap-4'>
         {products.map((product) => (
-          <div key={product._id} style={{
-            padding: '10px',
-            border: '1px solid #ddd',
-            borderRadius: '10px',
-            backgroundColor: '#f9f9f9',
-            boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-          }}>
-            <h3>{product.productName}</h3>
-            <p>Price: ${product.price}</p>
-            <p>Category: {product.productCategory}</p>
-            <p>{product.productDetails}</p>
-            <p>Contact: {product.phoneNumber}</p>
-            <button onClick={() => handleUpdate(product._id)} style={{
-              padding: '10px',
-              fontSize: '0.9em',
-              color: 'white',
-              backgroundColor: '#2196F3',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              marginRight: '10px',
-            }}>
-              Update
-            </button>
-            <button onClick={() => handleDelete(product._id)} style={{
-              padding: '10px',
-              fontSize: '0.9em',
-              color: 'white',
-              backgroundColor: '#f44336',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}>
-              Delete
-            </button>
-          </div>
+          // <div key={product._id} style={{
+          //   padding: '10px',
+          //   border: '1px solid #ddd',
+          //   borderRadius: '10px',
+          //   backgroundColor: '#f9f9f9',
+          //   boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+          // }}>
+          //   <h3>{product.productName}</h3>
+          //   <p>Price: ${product.price}</p>
+          //   <p>Category: {product.productCategory}</p>
+          //   <p>{product.productDetails}</p>
+          //   <p>Contact: {product.phoneNumber}</p>
+          //   <button onClick={() => handleUpdate(product._id)} style={{
+          //     padding: '10px',
+          //     fontSize: '0.9em',
+          //     color: 'white',
+          //     backgroundColor: '#2196F3',
+          //     border: 'none',
+          //     borderRadius: '5px',
+          //     cursor: 'pointer',
+          //     marginRight: '10px',
+          //   }}>
+          //     Update
+          //   </button>
+          //   <button onClick={() => handleDelete(product._id)} style={{
+          //     padding: '10px',
+          //     fontSize: '0.9em',
+          //     color: 'white',
+          //     backgroundColor: '#f44336',
+          //     border: 'none',
+          //     borderRadius: '5px',
+          //     cursor: 'pointer',
+          //   }}>
+          //     Delete
+          //   </button>
+          // </div>
+<div class="w-full md:w-3/4 lg:w-4/5 xl:w-[900px] p-4 border border-gray-300 rounded shadow-sm bg-white" key={product._id}>
+  <p class="text-lg font-semibold text-gray-800 text-left">{product.productName}</p>
+  <p class="text-sm text-gray-800 text-left">Price: <span class="font-medium">Rs. {product.price}</span></p>
+  <p class="text-sm text-gray-800 text-left">Category: <span class="font-medium">{product.productCategory}</span></p>
+  <p class="text-sm text-gray-800 text-left">{product.productDetails}</p>
+  <p class="text-sm text-gray-800 text-left">Contact: <span class="font-medium">{product.phoneNumber}</span></p>
+
+  <div class="flex space-x-2 mt-4">
+    <button class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800" onClick={() => handleUpdate(product._id)}>Update</button>
+    <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" onClick={() => handleDelete(product._id)}>Delete</button>
+  </div>
+</div>
+
         ))}
       </div>
     </div>
