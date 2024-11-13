@@ -42,7 +42,7 @@ function Byer() {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
+      {/* <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0' }}>
         <h1>My eCommerce Store</h1>
         <div>
           <button onClick={handleCart} style={{ padding: '10px 20px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', marginRight: '10px' }}>
@@ -52,11 +52,13 @@ function Byer() {
             Logout
           </button>
         </div>
-      </header>
+      </header> */}
 
-      <section style={{ marginTop: '20px' }}>
-        <h2>Featured Products</h2>
-        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+      <section className='mt-[20px] text-center'>
+        <h1 className='font-medium text-3xl mb-8 text-slate-700'>
+        Featured Products
+      </h1>
+        {/* <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
           {products.map((product, index) => (
             <div key={index} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '5px', width: '200px', textAlign: 'center' }}>
               <h3>{product.productName}</h3>
@@ -70,7 +72,23 @@ function Byer() {
               </button>
             </div>
           ))}
-        </div>
+        </div> */}
+        <div class="container mx-auto">
+           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            {products.map((product, index) => (
+                <div class="bg-white shadow-md rounded-lg p-4 flex flex-col" key={index}> 
+                <div class="w-full h-48 mb-2 overflow-hidden"> 
+                  {product.image ? <img class="w-full h-full object-contain object-center" src={product.image} alt={product.productName} loading="lazy"/> : <img src={`https://placehold.co/800?text=${product.productName}&font=roboto`}class='w-full h-full object-contain object-center' alt={product.productName}/>}
+                </div> 
+                <h3 class="text-lg font-semibold mb-2 text-left text-gray-700">{product.productName}</h3> 
+                <p class="text-gray-600 mb-2 text-left line-clamp-2">{product.productDetails}</p> 
+                <div class="text-xl font-bold mb-2 text-left text-gray-700">${product.price}</div> 
+                <button onClick={() => addCart(index)} class="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto">Add to Cart</button> 
+            </div> 
+            ))}
+
+            </div>
+          </div>
       </section>
 
       <section style={{ marginTop: '40px' }}>

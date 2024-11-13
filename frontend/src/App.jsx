@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Update from './Pages/Update/Update';
@@ -9,6 +9,7 @@ import Seller from './Pages/Seller/Seller';
 import { auth } from './firebase/firebase';
 import './App.css';
 import Cart from './Pages/MyCart/Cart';
+import Navbar from './Components/Navbar'
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -52,9 +53,11 @@ function App() {
     setUser(null);
     localStorage.removeItem('user');
   };
-
+  const location = useLocation();
+  const showNavbar = user && location.pathname !== '/';
   return (
-    <div>
+    <div className='bg-[#f4f4fb]'>
+      {showNavbar && <Navbar onLogout={handleLogout} />}
       <Routes>
         {user ? (
          <>
