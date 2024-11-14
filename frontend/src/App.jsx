@@ -56,7 +56,7 @@ function App() {
   const location = useLocation();
   const showNavbar = user && location.pathname !== '/';
   return (
-    <div className='bg-[#f4f4fb]'>
+    <div className='bg-[#f4f4fb] min-h-screen'>
       {showNavbar && <Navbar onLogout={handleLogout} />}
       <Routes>
         {user ? (
