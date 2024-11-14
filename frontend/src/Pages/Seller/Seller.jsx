@@ -124,7 +124,7 @@ function Seller() {
   };
 
   return (
-      <div class="p-5 font-sans text-center max-w-lg mx-auto">
+      <div class="p-5 font-sans text-center text-black max-w-lg mx-auto">
 
       <h1 className='font-medium text-3xl mb-5 text-slate-700'>
         List Your Product for Sale
@@ -248,8 +248,9 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
           //     Delete
           //   </button>
           // </div>
-<div class="w-full md:w-3/4 lg:w-4/5 xl:w-[900px] p-4 border border-gray-300 rounded shadow-sm bg-white" key={product._id}>
-  <p class="text-lg font-semibold text-gray-800 text-left">{product.productName}</p>
+<div class="w-full md:w-3/4 lg:w-4/5 xl:w-[900px] p-4 border border-gray-300 rounded shadow-sm bg-white flex flex-col items-center text-center" key={product._id}>
+<img src={product.image} class="w-40 h-40 object-cover" alt="Product Image" />
+<p class="text-lg font-semibold text-gray-800 text-left">{product.productName}</p>
   <p class="text-sm text-gray-800 text-left">Price: <span class="font-medium">Rs. {product.price}</span></p>
   <p class="text-sm text-gray-800 text-left">Category: <span class="font-medium">{product.productCategory}</span></p>
   <p class="text-sm text-gray-800 text-left">{product.productDetails}</p>
