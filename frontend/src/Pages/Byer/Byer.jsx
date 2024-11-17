@@ -135,7 +135,7 @@ function Byer() {
                 </div>
                 <h3 className="text-lg font-semibold mb-2 text-left text-gray-700">{product.productName}</h3>
                 <p className="text-gray-600 mb-2 text-left line-clamp-2">{product.productDetails}</p>
-                <div className="text-xl font-bold mb-2 text-left text-gray-700">${product.price}</div>
+                <div className="text-xl font-bold mb-2 text-left text-gray-700">₹{product.price}</div>
                 <button
                   onClick={() => addCart(index)}
                   className="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto"
