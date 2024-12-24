@@ -1,5 +1,5 @@
 {
-  "name": "mankevichar",
+  "name": "joltmarket",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,11 +9,11 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.20",
     "firebase": "^11.0.1",
-    "framer-motion": "^11.11.11",
+    "framer-motion": "^11.11.15",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0",
+    "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.6",
     "tailwindcss": "^3.4.14",
