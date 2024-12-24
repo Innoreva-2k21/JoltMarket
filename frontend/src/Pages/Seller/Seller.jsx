@@ -124,15 +124,16 @@ function Seller() {
   };
 
   return (
-      <div class="p-5 font-sans text-center text-black max-w-lg mx-auto">
+      <div className='dark:bg-black'>
+        <div class="p-5 font-sans text-center text-black max-w-lg mx-auto dark:bg-black">
 
-      <h1 className='font-medium text-3xl mb-5 text-slate-700'>
+      <h1 className='font-medium text-3xl mb-5 text-slate-700 dark:text-white'>
         List Your Product for Sale
       </h1>
 
       {errorMessage && <div style={{ color: 'red', marginBottom: '10px' }}>{errorMessage}</div>}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-5 border border-gray-300 rounded-lg bg-gray-50 shadow-md">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-5 border border-gray-300 rounded-lg bg-gray-50 shadow-md dark:bg-gray-800">
 
         {/* Form Fields */}
         <input
@@ -140,7 +141,7 @@ function Seller() {
   placeholder="Product Name"
   value={productName}
   onChange={(e) => setProductName(e.target.value)}
-  class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+  class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
 />
 
         <input
@@ -148,7 +149,7 @@ function Seller() {
           placeholder="Price"
           value={price}
           onChange={(e) => setProductPrice(e.target.value)}
-class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
         />
 
         <input
@@ -156,13 +157,13 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
           placeholder="Product Category"
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
-class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
         />
 
         <input
           type="file"
           onChange={(e) => setProductImage(e.target.files[0])}
-class="p-3 text-base rounded-lg border file:bg-gray-200 file:border-2 file:text-gray-400 file:rounded-md file:border-gray-300 border-gray-300 transition-transform duration-200 bg-gray-200"
+class="p-3 text-base rounded-lg border file:bg-gray-200 file:border-2 file:text-gray-400 file:rounded-md file:border-gray-300 border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
         />
 
         <textarea
@@ -170,7 +171,7 @@ class="p-3 text-base rounded-lg border file:bg-gray-200 file:border-2 file:text-
           rows="4"
           value={productDetails}
           onChange={(e) => setProductDetails(e.target.value)}
-class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
         />
 
         <input
@@ -178,19 +179,19 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200"
+class="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
         />
 
         <button type="submit" style={{
           padding: '15px',
           fontSize: '1em',
           color: 'white',
-          backgroundColor: '#3b1c80',
+          backgroundColor: 'purple-700',
           border: 'none',
           borderRadius: '8px',
           cursor: 'pointer',
           transition: 'background-color 0.3s, transform 0.3s',
-        }}>
+        }} className="bg-purple-700 dark:bg-blue-500">
           Submit
         </button>
       </form>
@@ -209,8 +210,8 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
         Logout
       </button> */}
 
-      <h1 className='font-medium text-3xl mb-5 mt-5 text-slate-700'>Your Products</h1>
-      <div className='flex flex-col items-center justify-center gap-4'>
+      <h1 className='font-medium text-3xl mb-5 mt-5 text-slate-700 dark:text-white'>Your Products</h1>
+      <div className='flex flex-col items-center justify-center gap-4 dark:bg-gray-800'>
         {products.map((product) => (
           // <div key={product._id} style={{
           //   padding: '10px',
@@ -248,13 +249,13 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
           //     Delete
           //   </button>
           // </div>
-<div class="w-full md:w-3/4 lg:w-4/5 xl:w-[900px] p-4 border border-gray-300 rounded shadow-sm bg-white flex flex-col items-center text-center" key={product._id}>
+<div class="w-full md:w-3/4 lg:w-4/5 xl:w-[900px] p-4 border border-gray-300 rounded shadow-sm bg-white flex flex-col items-center text-center dark:bg-gray-800" key={product._id}>
 <img src={product.image} class="w-40 h-40 object-cover" alt="Product Image" />
-<p class="text-lg font-semibold text-gray-800 text-left">{product.productName}</p>
-  <p class="text-sm text-gray-800 text-left">Price: <span class="font-medium">Rs. {product.price}</span></p>
-  <p class="text-sm text-gray-800 text-left">Category: <span class="font-medium">{product.productCategory}</span></p>
-  <p class="text-sm text-gray-800 text-left">{product.productDetails}</p>
-  <p class="text-sm text-gray-800 text-left">Contact: <span class="font-medium">{product.phoneNumber}</span></p>
+<p class="text-lg font-semibold text-gray-800 text-left dark:text-white">{product.productName}</p>
+  <p class="text-sm text-gray-800 text-left dark:text-white">Price: <span class="font-medium">Rs. {product.price}</span></p>
+  <p class="text-sm text-gray-800 text-left dark:text-white">Category: <span class="font-medium">{product.productCategory}</span></p>
+  <p class="text-sm text-gray-800 text-left dark:text-white">{product.productDetails}</p>
+  <p class="text-sm text-gray-800 text-left dark:text-white">Contact: <span class="font-medium">{product.phoneNumber}</span></p>
 
   <div class="flex space-x-2 mt-4">
     <button class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800" onClick={() => handleUpdate(product._id)}>Update</button>
@@ -264,6 +265,7 @@ class="p-3 text-base rounded-lg border border-gray-300 transition-transform dura
 
         ))}
       </div>
+    </div>
     </div>
   );
 }

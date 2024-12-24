@@ -67,20 +67,20 @@ function Byer() {
   }, [minPrice, maxPrice, searchTerm, selectedCategory, products]);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }} className='dark:bg-black'>
       <section className="mt-[20px] text-center">
-        <h1 className="font-medium text-3xl mb-8 text-slate-700">
+        <h1 className="font-medium text-3xl mb-8 text-slate-700 dark:text-white">
           Featured Products
         </h1>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-4 mb-6">
+        <div className="flex flex-wrap justify-center gap-4 mb-6 dark:text-white">
           <input
             type="number"
             placeholder="Min Price"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            className="border px-4 py-2 rounded-md"
+            className="border px-4 py-2 rounded-md dark:text-white"
           />
           <input
             type="number"
@@ -114,10 +114,10 @@ function Byer() {
 
         {/* Product List */}
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 ">
             {filteredProducts.map((product, index) => (
-              <div className="bg-white shadow-md rounded-lg p-4 flex flex-col" key={index}>
-                <div className="w-full h-48 mb-2 overflow-hidden">
+              <div className="bg-white shadow-md rounded-lg p-4 flex flex-col dark:bg-gray-700" key={index}>
+                <div className="w-full h-48 mb-2 overflow-hidden dark:text-white">
                   {product.image ? (
                     <img
                       className="w-full h-full object-contain object-center"
@@ -133,12 +133,12 @@ function Byer() {
                     />
                   )}
                 </div>
-                <h3 className="text-lg font-semibold mb-2 text-left text-gray-700">{product.productName}</h3>
-                <p className="text-gray-600 mb-2 text-left line-clamp-2">{product.productDetails}</p>
-                <div className="text-xl font-bold mb-2 text-left text-gray-700">₹{product.price}</div>
+                <h3 className="text-lg font-semibold mb-2 text-left text-gray-700 dark:text-white">{product.productName}</h3>
+                <p className="text-gray-600 mb-2 text-left line-clamp-2 dark:text-white">{product.productDetails}</p>
+                <div className="text-xl font-bold mb-2 text-left text-gray-700 dark:text-white">₹{product.price}</div>
                 <button
                   onClick={() => addCart(index)}
-                  className="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto"
+                  className="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto dark:bg-blue-500 dark:hover:bg-[#1321DE]"
                 >
                   Add to Cart
                 </button>

@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Navbar = ({onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem('darkMode') === 'true'
+  ); 
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   const getNavLinkClass = ({ isActive }) => 
     `text-lg text-white inline-block w-max hover:text-gray-300 ${isActive ? 'border-b-2 border-white' : ''}`;
     
   return (
-    <nav className="bg-[#3d1689] shadow-md">
+    <nav className="bg-[#3d1689] shadow-md dark:bg-gray-900">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-0"> 
@@ -42,6 +58,15 @@ const Navbar = ({onLogout }) => {
             className="text-lg text-white"
           >
             Logout
+          </button>
+       
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className="text-lg text-white hover:text-gray-300"
+          >
+            {darkMode ? 'Light' : 'Dark'}
           </button>
         </div>
 
@@ -95,6 +120,13 @@ const Navbar = ({onLogout }) => {
             className="block w-max text-left text-lg text-white py-2 px-4 border border-white"
           >
             Logout
+          </button>
+             {/* Dark Mode Toggle for Mobile */}
+             <button
+            onClick={toggleDarkMode}
+            className="block w-max text-left text-lg text-white py-2 px-4 border border-white"
+          >
+            {darkMode ? 'Light Mode' : 'Dark Mode'}
           </button>
         </div>
       )}
