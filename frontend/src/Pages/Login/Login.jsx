@@ -60,25 +60,25 @@ const Login = ({ onLogin }) => {
     //   </table>
     // </motion.div>
     <div class="font-[sans-serif]">
-      <div class="min-h-screen flex fle-col items-center justify-center py-6 px-4">
+      <div class="min-h-screen flex fle-col items-center justify-center py-6 px-4 dark:bg-black">
         <div class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full">
-          <div class="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto bg-white">
-          <form className="space-y-8">
+          <div class="border border-gray-300 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] max-md:mx-auto bg-white dark:bg-gray-800">
+          <form className="space-y-8 dark:bg-gray-800">
             <div class="mb-8">
-              <h3 class="text-[#3d1689] text-3xl font-extrabold">Welcome!</h3>
+              <h3 class="text-[#3d1689] text-3xl font-extrabold dark:text-white">Welcome!</h3>
             </div>
 
             <div>
-              <label class="text-gray-800 text-[15px] mb-2 block">Email</label>
+              <label class="text-gray-800 text-[15px] mb-2 block dark:text-white">Email</label>
               <div class="relative flex items-center">
-                <input name="email" type="text" required class="w-full text-sm text-gray-800 bg-gray-200 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600" placeholder="Enter email" />
+                <input name="email" type="text" required class="w-full text-sm text-gray-800 bg-gray-200 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600 dark:bg-gray-900 dark:text-white" placeholder="Enter email" />
               </div>
             </div>
 
             <div class="mt-4">
-              <label class="text-gray-800 text-[15px] mb-2 block">Password</label>
+              <label class="text-gray-800 text-[15px] mb-2 block dark:text-white">Password</label>
               <div class="relative flex items-center">
-                <input name="password" type="password" required class="w-full text-sm text-gray-800 bg-gray-200 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600" placeholder="Enter password" />
+                <input name="password" type="password" required class="w-full text-sm text-gray-800 bg-gray-200 focus:bg-transparent px-4 py-3.5 rounded-md outline-blue-600 dark:bg-gray-900 dark:text-white" placeholder="Enter password" />
               </div>
             </div>
 

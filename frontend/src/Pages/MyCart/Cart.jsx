@@ -12,33 +12,34 @@ function Cart() {
   };
 
   return (
-    // <div className='text-center'>
-    //   <h1 className='font-medium text-3xl mb-5 mt-5 text-slate-700'>
-    //       Shopping Cart
-    //   </h1>
-    //   <button onClick={() => {clearCart();alert("cleared Cart")}} style={{ padding: '10px 20px', backgroundColor: '#ff4c4c', color: 'white', border: 'none', borderRadius: '5px', marginBottom: '20px' }}>
-    //     Clear Cart
-    //   </button>
+   <div className="dark:bg-black">
+     {/* <div className='text-center'>
+      <h1 className='font-medium text-3xl mb-5 mt-5 text-slate-700'>
+          Shopping Cart
+      </h1>
+      <button onClick={() => {clearCart();alert("cleared Cart")}} style={{ padding: '10px 20px', backgroundColor: '#ff4c4c', color: 'white', border: 'none', borderRadius: '5px', marginBottom: '20px' }}>
+        Clear Cart
+      </button>
 
-    //   <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-    //     {cart.map((product, index) => (
-    //       <div key={index} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '5px', width: '200px', textAlign: 'center' }}>
-    //         <h3>{product.productName}</h3>
-    //         <p><strong>Price:</strong> ${product.price}</p>
-    //         <p><strong>Category:</strong> {product.productCategory}</p>
-    //         <p><strong>Details:</strong> {product.productDetails}</p>
-    //         <p><strong>Phone:</strong> {product.phoneNumber}</p>
-    //         {product.image && <img src={product.image} alt={product.productName} style={{ width: '100%', borderRadius: '10px' }} />}
-    //         <button onClick={() => delCart(index)} style={{ padding: '5px 10px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', marginTop: '10px' }}>
-    //           Remove Item
-    //         </button>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
+      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+        {cart.map((product, index) => (
+          <div key={index} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '5px', width: '200px', textAlign: 'center' }}>
+            <h3>{product.productName}</h3>
+            <p><strong>Price:</strong> ${product.price}</p>
+            <p><strong>Category:</strong> {product.productCategory}</p>
+            <p><strong>Details:</strong> {product.productDetails}</p>
+            <p><strong>Phone:</strong> {product.phoneNumber}</p>
+            {product.image && <img src={product.image} alt={product.productName} style={{ width: '100%', borderRadius: '10px' }} />}
+            <button onClick={() => delCart(index)} style={{ padding: '5px 10px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', marginTop: '10px' }}>
+              Remove Item
+            </button>
+          </div>
+        ))}
+      </div>
+    </div> */}
 
-    <div class="container mx-auto text-center p-[20px] relative">
-      <h1 className="font-medium text-3xl mb-5 text-slate-700">
+    <div class="container m-0 mx-auto text-center p-[20px] relative dark:bg-black">
+      <h1 className="font-medium text-3xl mb-5 text-slate-700 dark:text-white">
         Shopping Cart
       </h1>
       <button
@@ -55,7 +56,7 @@ function Cart() {
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {cart.map((product, index) => (
           <div
-            class="bg-white shadow-md rounded-lg p-2 flex flex-col"
+            class="bg-white shadow-md rounded-lg p-2 flex flex-col dark:bg-gray-800"
             key={index}
           >
             <div class="w-full h-48 mb-2 overflow-hidden">
@@ -74,23 +75,23 @@ function Cart() {
                 />
               )}
             </div>
-            <h3 class="text-lg font-semibold text-left text-gray-800">
+            <h3 class="text-lg font-semibold text-left text-gray-800 dark:text-white">
               {product.productName}
             </h3>
-            <p class="text-gray-600 text-left line-clamp-2">
-              <strong className="text-gray-700">Details:</strong>{" "}
+            <p class="text-gray-600 text-left line-clamp-2 dark:text-gray-100">
+              <strong className="text-gray-700 dark:text-gray-300">Details:</strong>{" "}
               {product.productDetails}
             </p>
-            <p class="text-gray-600 text-left line-clamp-2">
-              <strong className="text-gray-700">Category:</strong>{" "}
+            <p class="text-gray-600 text-left line-clamp-2 dark:text-gray-100">
+              <strong className="text-gray-700 dark:text-gray-300">Category:</strong>{" "}
               {product.productCategory}
             </p>
-            <p class="text-gray-600 text-left line-clamp-2">
-              <strong className="text-gray-700">Phone:</strong>{" "}
+            <p class="text-gray-600 text-left line-clamp-2 dark:text-gray-100">
+              <strong className="text-gray-700 dark:text-gray-300">Phone:</strong>{" "}
               {product.phoneNumber}
             </p>
-            <div class="text-xl font-bold mb-2 text-left text-gray-700">
-              ${product.price}
+            <div class="text-xl font-bold mb-2 text-left text-gray-700 dark:text-white">
+            ₹{product.price}
             </div>
             <button
               onClick={() => delCart(index)}
@@ -116,6 +117,7 @@ function Cart() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

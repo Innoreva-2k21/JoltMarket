@@ -10,6 +10,7 @@ import { auth } from './firebase/firebase';
 import './App.css';
 import Cart from './Pages/MyCart/Cart';
 import Navbar from './Components/Navbar'
+import Footer from './Components/Footer';
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -55,10 +56,12 @@ function App() {
   };
   const location = useLocation();
   const showNavbar = user && location.pathname !== '/';
+  const showFooter = user && location.pathname !== '/';
   return (
-    <div className='bg-[#f4f4fb] min-h-screen'>
+    <div className='bg-[#f4f4fb] min-h-screen flex flex-col'>
       {showNavbar && <Navbar onLogout={handleLogout} />}
-      <Routes>
+      <div className="flex-grow dark:bg-black">
+      <Routes >
         {user ? (
          <>
           <Route path="/" element={<Home onLogout={handleLogout} />} />
@@ -72,6 +75,8 @@ function App() {
           <Route path="/" element={<Login onLogin={setUser} />} />
         )}
       </Routes>
+      </div>
+      {showFooter && <Footer />}
     </div>
   );
 }

@@ -98,8 +98,6 @@ exports.createEntry = async (req, res) => {
 };
 
 
-
-// Update a journal entry
 // exports.updateEntry = async (req, res) => {
 //     try {
 //         const { productName, price } = req.body;
