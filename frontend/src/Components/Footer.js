@@ -32,13 +32,9 @@ const Footer = () => {
             <img
               src="jm.png"
               alt="Logo"
-              className="h-8 w-8 filter invert brightness-0"
+              className="h-20 w-18 filter invert brightness-0"
             />
-            <img
-              src="jmn.png"
-              alt="Logo Text"
-              className="h-6 w-auto filter invert brightness-0"
-            />
+            
           </div>
         </div>
 

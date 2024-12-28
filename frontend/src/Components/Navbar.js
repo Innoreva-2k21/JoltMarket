@@ -36,12 +36,7 @@ const Navbar = ({ onLogout }) => {
           <img
             src="jm.png"
             alt="Logo"
-            className="h-10 w-10 mr-2 filter invert brightness-0"
-          />
-          <img
-            src="jmn.png"
-            alt="Logo Text"
-            className="h-8 w-auto filter invert brightness-0"
+            className="h-15 w-20 mr-2 filter invert brightness-0"
           />
         </div>
 

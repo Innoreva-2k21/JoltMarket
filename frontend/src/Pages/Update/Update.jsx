@@ -18,7 +18,7 @@ function Update() {
   useEffect(() => {
     const fetchProductById = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/product/getId`, {
+        const response = await fetch(`https://backjolt-1.onrender.com/product/getId`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function Update() {
     formData.append('id', id);
 
     try {
-      const response = await fetch(`http://localhost:5000/product/Update`, {
+      const response = await fetch(`https://backjolt-1.onrender.com/product/Update`, {
         method: 'POST',
         body: formData,
       });

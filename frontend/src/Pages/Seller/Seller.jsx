@@ -24,7 +24,7 @@ function Seller() {
       if (userEmail) {
         try {
           const response = await fetch(
-            "http://localhost:5000/product/getEmail",
+            "https://backjolt-1.onrender.com/product/getEmail",
             {
               method: "POST",
               headers: {
@@ -101,7 +101,7 @@ function Seller() {
     formData.append("image", productImage);
 
     try {
-      const response = await fetch("http://localhost:5000/product/create", {
+      const response = await fetch("https://backjolt-1.onrender.com/product/create", {
         method: "POST",
         body: formData,
       });
@@ -125,7 +125,7 @@ function Seller() {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/product/delete/${id}`,
+        `https://backjolt-1.onrender.com/product/delete/${id}`,
         {
           method: "DELETE",
         }

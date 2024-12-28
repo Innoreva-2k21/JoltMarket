@@ -33,7 +33,7 @@ function Byer() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/product/entries");
+        const response = await fetch("https://backjolt-1.onrender.com/product/entries");
         if (!response.ok) throw new Error("Failed to fetch products");
         const data = await response.json();
         setProducts(data);
