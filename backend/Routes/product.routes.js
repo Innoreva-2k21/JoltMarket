@@ -13,6 +13,8 @@ router.post('/getEmail',productController.getEntriesByEmail);
 
 // Create a new journal entry (with image upload) initially entries
 router.post('/create', upload.single('image'), productController.createEntry); 
+router.post('/createBuyed', productController.createBuyedEntry); 
+
 router.post('/Update',upload.single('image'),productController.updateEntry);
 
 // // Update a journal entry (with image upload)

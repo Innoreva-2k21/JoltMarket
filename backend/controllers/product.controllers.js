@@ -1,4 +1,5 @@
 const Product = require('../model/product');
+const BuyedProduct = require('../model/BuyedProduct');
 const mongoose = require('mongoose');
 
 // Get all journal entries
@@ -64,6 +65,44 @@ exports.getEntryById = async (req, res) => {
 
 
 // Create a new journal entry with an image upload
+exports.createBuyedEntry = async (req, res) => {
+    try {
+        // Log the incoming request body and file
+        const { productName, price,image, phoneNumber, productCategory, productDetails, userEmail } = req.body;
+
+        // Validate required fields
+        if (!(productName && price && phoneNumber && productCategory && productDetails)) {
+            return res.status(400).send("All fields (Product Name, Price, Phone Number, Product Category, and Product Details) are required.");
+        }
+        
+
+        // Create the product entry
+        const product = await BuyedProduct.create({
+            productName,
+            price,
+            image,  // Save the image path to the product entry
+            userEmail, // Store user email
+            phoneNumber, // Add phone number to the product entry
+            productCategory, // Add product category
+            productDetails // Add product details
+        });
+        
+        if(product){
+            return res.status(201).json(product);
+        }else{
+            console.log("not success");
+        }
+
+
+    } catch (error) {
+        console.error('Error creating product entry:', error.message); // Log the error message
+        console.log("not success");
+        return res.status(500).send("Error creating product entry.");
+        
+    }
+};
+
+
 exports.createEntry = async (req, res) => {
     try {
         // Log the incoming request body and file

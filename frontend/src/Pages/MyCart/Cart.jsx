@@ -1,55 +1,88 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../Context/CartManager/CartManager";
 import { toast } from "react-toastify";
 
 function Cart() {
   const { cart, removeFromCart, clearCart } = useCart();
-  const [myCart, setMyCart] = useState([]); // Initialize myCart as an empty array
+  const [myCart, setMyCart] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
 
-  // Check if phone number is Indian
   const isIndianPhoneNumber = (phoneNumber) => {
     const cleanNumber = phoneNumber.replace(/\D/g, "");
     return cleanNumber.startsWith("91") || cleanNumber.match(/^[6-9]\d{9}$/);
   };
 
-  // Function to remove item from the cart
   const delCart = (ind) => {
     removeFromCart(ind);
     toast.success("Item removed from cart");
-
-    // Update localStorage with updated cart
-    localStorage.setItem("carts", JSON.stringify(myCart)); // Save updated cart to localStorage
+    localStorage.setItem("carts", JSON.stringify(myCart));
   };
 
-  // Clear the cart
   const handleClearCart = () => {
     clearCart();
     toast.success("Cart cleared successfully");
-    localStorage.removeItem("carts"); // Remove cart from localStorage
+    localStorage.removeItem("carts");
   };
 
-  // Load cart data from localStorage when the component mounts
+  const handleSendToAPI = async () => {
+    try {
+      // Iterate over each product in the cart and send each one separately to the API
+      for (const product of myCart) {
+        const productData = {
+          productName: product.productName,
+          price: product.price,
+          image: product.image,
+          userEmail: userEmail,  // Get user email from localStorage
+          productDetails: product.productDetails,
+          productCategory: product.productCategory,
+          phoneNumber: product.phoneNumber,
+        };
+
+        const response = await fetch("https://backjolt-1.onrender.com/product/createBuyed", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(productData),
+        });
+
+        if (response.ok) {
+          toast.success(`Product "${product.productName}" successfully sent to the server!`);
+        } else {
+          toast.error(`Failed to send product "${product.productName}". Please try again.`);
+        }
+      }
+
+      // Clear the cart after all products are successfully sent
+      clearCart();
+      localStorage.removeItem("carts");
+    } catch (error) {
+      console.error("Error sending cart to the server:", error);
+      toast.error("An error occurred while sending the cart.");
+    }
+  };
+
   useEffect(() => {
     const storedCart = localStorage.getItem("carts");
     if (storedCart) {
       try {
-        const parsedCart = JSON.parse(storedCart); // Parse the stored string back into an array of objects
-        setMyCart(parsedCart); // Set the parsed cart data into state
+        const parsedCart = JSON.parse(storedCart);
+        setMyCart(parsedCart);
       } catch (error) {
         console.error("Error parsing cart data from localStorage:", error);
       }
     } else {
-      setMyCart(cart); // If no cart in localStorage, use the initial cart
+      setMyCart(cart);
     }
-  }, [cart]); // This effect runs when the component mounts or when the cart changes
 
-  // Sync myCart with localStorage whenever it changes
-  useEffect(() => {
-    if (myCart.length > 0) {
-      localStorage.setItem("carts", JSON.stringify(myCart)); // Store updated cart in localStorage
+    // Fetch userEmail from localStorage
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const parsedUser = JSON.parse(userData);
+      setUserEmail(parsedUser.email);  // Set userEmail from localStorage
     }
-  }, [myCart]); // This effect runs whenever myCart changes
+  }, [cart]);
 
   return (
     <div className="dark:bg-black">
@@ -57,13 +90,22 @@ function Cart() {
         <h1 className="font-medium text-3xl mb-5 text-slate-700 dark:text-white">
           Shopping Cart
         </h1>
-        <button
-          type="button"
-          className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 md:px-5 py-2 md:py-2.5 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 absolute top-5 right-2"
-          onClick={handleClearCart}
-        >
-          Clear Cart
-        </button>
+        <div className="absolute top-5 right-2 flex gap-2">
+          <button
+            type="button"
+            className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-2 md:px-5 py-2 md:py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+            onClick={handleClearCart}
+          >
+            Clear Cart
+          </button>
+          <button
+            type="button"
+            className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 md:px-5 py-2 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900"
+            onClick={handleSendToAPI}
+          >
+            Submit Cart
+          </button>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {myCart?.map((product, index) => (
             <div
