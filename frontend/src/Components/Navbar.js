@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useCart } from "../Context/CartManager/CartManager";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import { FiLogOut } from "react-icons/fi";
+
 
 const Navbar = ({ onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,16 +71,38 @@ const Navbar = ({ onLogout }) => {
           </button>
 
           {/* Dark Mode Toggle */}
-          <button
+          {/* <button
             onClick={toggleDarkMode}
             className="text-lg text-white hover:text-gray-300"
           >
             {darkMode ? "Light" : "Dark"}
+          </button> */}
+          <button
+            onClick={toggleDarkMode}
+            className="text-lg text-white hover:text-gray-300"
+          >
+            {/* **Change: new toggle with icon added */}
+            {darkMode ? (
+              <SunIcon className="w-6 h-6" />
+            ) : (
+              <MoonIcon className="w-6 h-6" /> 
+            )}
           </button>
         </div>
 
         {/* Hamburger Menu Icon */}
-        <div className="md:hidden">
+        <div className="md:hidden items-center space-x-4">
+        <button
+            onClick={toggleDarkMode}
+            className="text-lg text-white hover:text-gray-300"
+          >
+            {/* **Change: new toggle with icon added */}
+            {darkMode ? (
+              <SunIcon className="w-6 h-6" />
+            ) : (
+              <MoonIcon className="w-6 h-6" /> 
+            )}
+          </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white focus:outline-none"
@@ -97,8 +122,11 @@ const Navbar = ({ onLogout }) => {
               ></path>
             </svg>
           </button>
-        </div>
+        </div> 
       </div>
+      
+
+      
 
       {/* Mobile Menu */}
       {isOpen && (
@@ -110,23 +138,19 @@ const Navbar = ({ onLogout }) => {
             Sell
           </NavLink>
           <NavLink to="/Cart" className={getNavLinkClass}>
-            Cart
+            Cart 
           </NavLink>
           <button
-            onClick={() => {
-              onLogout();
-            }}
-            className="block w-max text-left text-lg text-white py-2 px-4 border border-white"
-          >
-            Logout
-          </button>
-          {/* Dark Mode Toggle for Mobile */}
-          <button
-            onClick={toggleDarkMode}
-            className="block w-max text-left text-lg text-white py-2 px-4 border border-white"
-          >
-            {darkMode ? "Light Mode" : "Dark Mode"}
-          </button>
+    onClick={() => {
+      onLogout();
+    }}
+    className="flex items-center justify-center text-lg text-white py-2 px-4 border border-white rounded-lg flex items-center hover:bg-gray-800 transition duration-300 "
+  >
+    <span className="mr-2 ">Logout</span>
+    <FiLogOut className="text-white text-xl" />
+  </button>
+          
+          
         </div>
       )}
     </nav>
