@@ -139,14 +139,26 @@ function Update() {
         />
         {fieldErrors.phoneNumber && <div style={{ color: 'red' }}>{fieldErrors.phoneNumber}</div>}
 
-        <input
-          type="text"
-          placeholder="Product Category"
+        <select
           value={productCategory}
           onChange={(e) => setProductCategory(e.target.value)}
           required
           style={{ margin: '10px 0', padding: '10px', width: '80%' }}
-        />
+        >
+          <option value="" disabled>Select Product Category</option>
+          <option value="Books & Study">Books & Study</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing & Accessories">Clothing & Accessories</option>
+          <option value="Room Essentials">Room Essentials</option>
+          <option value="Sports & Fitness">Sports & Fitness</option>
+          <option value="Games & Entertainment">Games & Entertainment</option>
+          <option value="Transport">Transport</option>
+          <option value="Personal Care">Personal Care</option>
+          <option value="Travel & Bags">Travel & Bags</option>
+          <option value="Hobbies & Creative">Hobbies & Creative</option>
+          <option value="Free / Giveaway">Free / Giveaway</option>
+          <option value="Other">Other</option>
+        </select>
         {fieldErrors.productCategory && <div style={{ color: 'red' }}>{fieldErrors.productCategory}</div>}
 
         <textarea

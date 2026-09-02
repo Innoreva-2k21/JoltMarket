@@ -35,9 +35,9 @@ const Navbar = ({ onLogout }) => {
         {/* Logo */}
         <div className="flex items-center gap-0">
           <img
-            src="jm.png"
+            src="/jolt_logo.png"
             alt="Logo"
-            className="h-15 w-20 mr-2 filter invert brightness-0"
+            className="h-12 w-auto object-contain rounded-xl"
           />
         </div>
 

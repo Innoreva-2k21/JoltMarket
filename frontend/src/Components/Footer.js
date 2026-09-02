@@ -30,11 +30,10 @@ const Footer = () => {
           {/* Logo Section */}
           <div className="flex items-center gap-2 mt-4 md:mt-0">
             <img
-              src="jm.png"
+              src="/jolt_logo.png"
               alt="Logo"
-              className="h-20 w-18 filter invert brightness-0"
+              className="h-16 w-auto object-contain rounded-xl"
             />
-            
           </div>
         </div>
 

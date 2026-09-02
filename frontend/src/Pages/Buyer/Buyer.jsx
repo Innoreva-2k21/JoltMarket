@@ -93,61 +93,74 @@ function Buyer() {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="border px-4 py-2 rounded-md"
+            className="border px-4 py-2 rounded-md dark:bg-gray-800 dark:text-white"
           >
             <option value="">All Categories</option>
-            {Array.from(new Set(products.map((p) => p.productCategory))).map(
-              (category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              )
-            )}
+            <option value="Books & Study">Books & Study</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing & Accessories">Clothing & Accessories</option>
+            <option value="Room Essentials">Room Essentials</option>
+            <option value="Sports & Fitness">Sports & Fitness</option>
+            <option value="Games & Entertainment">Games & Entertainment</option>
+            <option value="Transport">Transport</option>
+            <option value="Personal Care">Personal Care</option>
+            <option value="Travel & Bags">Travel & Bags</option>
+            <option value="Hobbies & Creative">Hobbies & Creative</option>
+            <option value="Free / Giveaway">Free / Giveaway</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
         {/* Product List */}
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 ">
-            {filteredProducts.map((product, index) => (
-              <div
-                className="bg-white shadow-md rounded-lg p-4 flex flex-col dark:bg-gray-700"
-                key={index}
-              >
-                <div className="w-full h-48 mb-2 overflow-hidden dark:text-white">
-                  {product.image ? (
-                    <img
-                      className="w-full h-full object-contain object-center"
-                      src={product.image}
-                      alt={product.productName}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <img
-                      src={`https://placehold.co/800?text=${product.productName}&font=roboto`}
-                      className="w-full h-full object-contain object-center"
-                      alt={product.productName}
-                    />
-                  )}
-                </div>
-                <h3 className="text-lg font-semibold mb-2 text-left text-gray-700 dark:text-white">
-                  {product.productName}
-                </h3>
-                <p className="text-gray-600 mb-2 text-left line-clamp-2 dark:text-white">
-                  {product.productDetails}
-                </p>
-                <div className="text-xl font-bold mb-2 text-left text-gray-700 dark:text-white">
-                  ₹{product.price}
-                </div>
-                <button
-                  onClick={() => addCart(index)}
-                  className="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto dark:bg-blue-500 dark:hover:bg-[#1321DE]"
+          {!loading && filteredProducts.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-xl text-gray-500 dark:text-gray-400 font-medium">
+                No products matched your criteria.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              {filteredProducts.map((product, index) => (
+                <div
+                  className="bg-white shadow-md rounded-lg p-4 flex flex-col dark:bg-gray-700"
+                  key={product._id || index}
                 >
-                  Add to Cart
-                </button>
-              </div>
-            ))}
-          </div>
+                  <div className="w-full h-48 mb-2 overflow-hidden dark:text-white">
+                    {product.image ? (
+                      <img
+                        className="w-full h-full object-contain object-center"
+                        src={product.image}
+                        alt={product.productName}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <img
+                        src={`https://placehold.co/800?text=${product.productName}&font=roboto`}
+                        className="w-full h-full object-contain object-center"
+                        alt={product.productName}
+                      />
+                    )}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-left text-gray-700 dark:text-white">
+                    {product.productName}
+                  </h3>
+                  <p className="text-gray-600 mb-2 text-left line-clamp-2 dark:text-white">
+                    {product.productDetails}
+                  </p>
+                  <div className="text-xl font-bold mb-2 text-left text-gray-700 dark:text-white">
+                    ₹{product.price}
+                  </div>
+                  <button
+                    onClick={() => addCart(index)}
+                    className="bg-[#3b1c80] text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full mt-auto dark:bg-blue-500 dark:hover:bg-[#1321DE]"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

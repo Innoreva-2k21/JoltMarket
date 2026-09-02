@@ -123,8 +123,14 @@ const Login = ({ onLogin }) => {
               </div>
             </form>
           </div>
-          <div className="lg:h-[360px] md:h-[260px] max-md:mt-8">
-            <img src="Jolt Market.png" className="w-full h-full max-md:w-4/5 mx-auto block object-contain" alt="logo_2" />
+          <div className="flex justify-center items-center max-md:mt-8">
+            <div className="w-72 md:w-80 lg:w-96">
+              <img
+                src="/jolt_logo.png"
+                className="w-full h-auto object-contain rounded-2xl shadow-md"
+                alt="logo_2"
+              />
+            </div>
           </div>
         </div>
       </div>

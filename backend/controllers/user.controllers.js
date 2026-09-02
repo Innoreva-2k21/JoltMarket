@@ -11,21 +11,21 @@ exports.signup = async (req, res) => {
         const normalizedEmail = String(email || '').trim().toLowerCase();
 
         if (!(firstName && lastName && normalizedEmail && password)) {
-            return res.status(401).send("Please fill all the required fields");
+            return res.status(400).json({ message: "Please fill all the required fields" });
         }
 
         if (!normalizedEmail.endsWith(allowedEmailDomain)) {
-            return res.status(400).send(`Only ${allowedEmailDomain} email addresses are allowed`);
+            return res.status(400).json({ message: `Only ${allowedEmailDomain} email addresses are allowed` });
         }
 
         if (String(password).length < 8) {
-            return res.status(400).send("Password must be at least 8 characters long");
+            return res.status(400).json({ message: "Password must be at least 8 characters long" });
         }
 
         // Checking if the email is unique
         const existUser = await User.findOne({ email: normalizedEmail });
         if (existUser) {
-            return res.status(400).send("User already registered with this email");
+            return res.status(400).json({ message: "Email already exists" });
         }
 
         // Password encryption
@@ -47,7 +47,7 @@ exports.signup = async (req, res) => {
         return res.status(201).json({ message: "Registered successfully", user });
     } catch (error) {
         console.log(error);
-        return res.status(500).send("There was an error during signup.");
+        return res.status(500).json({ message: "There was an error during signup." });
     }
 };
 

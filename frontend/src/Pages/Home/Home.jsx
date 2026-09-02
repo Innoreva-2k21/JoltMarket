@@ -7,7 +7,7 @@ function Home() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center' }} className='flex flex-col items-center justify-center h-screen gap-4'>
       <div className='w-72'>
-        <img src="jolt_logo.png" alt="logo" className='w-full object-contain object-center' />
+        <img src="jolt_logo.png" alt="logo" className='w-full object-contain object-center rounded-2xl' />
       </div>
       <p className='text-slate-700 font-medium text-lg'>Select an option to get started:</p>
 

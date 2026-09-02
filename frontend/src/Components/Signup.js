@@ -33,6 +33,14 @@ const Signup = () => {
       return;
     }
 
+    if (!formData.password || formData.password.length < 8) {
+      const message = 'Password must be at least 8 characters long';
+      setError(message);
+      toast.error(message);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(apiUrl('/user/signup'), {
         method: 'POST',
@@ -47,12 +55,22 @@ const Signup = () => {
         }),
       });
 
-      const data = await response.json().catch(() => null);
+      let message = 'Signup failed';
+      try {
+        const text = await response.text();
+        try {
+          const parsed = JSON.parse(text);
+          message = parsed?.message || text;
+        } catch {
+          message = text;
+        }
+      } catch (e) {
+        message = 'Signup failed';
+      }
 
       if (!response.ok) {
-        const message = typeof data === 'string' ? data : data?.message || 'Signup failed';
-        setError(message);
-        toast.error(message);
+        setError(message || 'Email already exists');
+        toast.error(message || 'Email already exists');
         return;
       }
 

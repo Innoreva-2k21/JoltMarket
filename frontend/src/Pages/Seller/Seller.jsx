@@ -51,19 +51,31 @@ function Seller() {
     return cleanNumber.startsWith("91") || cleanNumber.match(/^[6-9]\d{9}$/);
   };
 
+  const isValidPrice = (priceVal) => {
+    if (priceVal === undefined || priceVal === null || priceVal === "") return false;
+    const clean = String(priceVal).trim();
+    const num = parseFloat(clean);
+    return !isNaN(num) && num >= 0 && /^\d+(\.\d+)?$/.test(clean);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
 
     if (
       !productName ||
-      !price ||
+      price === "" ||
       !productCategory ||
       !productDetails ||
       !phoneNumber ||
       !productImage
     ) {
       setErrorMessage("Please fill in all fields.");
+      return;
+    }
+
+    if (!isValidPrice(price)) {
+      setErrorMessage("Price should be a number.");
       return;
     }
 
@@ -172,13 +184,26 @@ function Seller() {
             className="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
           />
 
-          <input
-            type="text"
-            placeholder="Product Category"
+          <select
             value={productCategory}
             onChange={(e) => setProductCategory(e.target.value)}
             className="p-3 text-base rounded-lg border border-gray-300 transition-transform duration-200 bg-gray-200 dark:bg-gray-700 dark:text-white"
-          />
+            required
+          >
+            <option value="" disabled>Select Product Category</option>
+            <option value="Books & Study">Books & Study</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Clothing & Accessories">Clothing & Accessories</option>
+            <option value="Room Essentials">Room Essentials</option>
+            <option value="Sports & Fitness">Sports & Fitness</option>
+            <option value="Games & Entertainment">Games & Entertainment</option>
+            <option value="Transport">Transport</option>
+            <option value="Personal Care">Personal Care</option>
+            <option value="Travel & Bags">Travel & Bags</option>
+            <option value="Hobbies & Creative">Hobbies & Creative</option>
+            <option value="Free / Giveaway">Free / Giveaway</option>
+            <option value="Other">Other</option>
+          </select>
 
           <input
             type="file"
