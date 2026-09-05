@@ -1,5 +1,23 @@
 const Product = require('../model/product');
 const mongoose = require('mongoose');
+const cloudinary = require('../config/cloudinary');
+
+function extractCloudinaryPublicId(url) {
+    if (!url || typeof url !== 'string' || !url.includes('cloudinary.com')) return null;
+    const match = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[a-zA-Z0-9]{3,4}$/);
+    return match ? match[1] : null;
+}
+
+async function destroyImage(url) {
+    const publicId = extractCloudinaryPublicId(url);
+    if (!publicId) return;
+    try {
+        await cloudinary.uploader.destroy(publicId);
+        console.log('Cloudinary image deleted:', publicId);
+    } catch (error) {
+        console.error('Cloudinary image deletion failed:', publicId, error);
+    }
+}
 
 // Get all journal entries
 exports.getAllEntries = async (req, res) => {
@@ -164,7 +182,8 @@ exports.updateEntry = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Delete the product
+        // Delete the old product (capture its image URL for cleanup)
+        const oldImage = product.image;
         let image = req.file ? req.file.path : null;
         await Product.findByIdAndDelete(id);
 
@@ -179,6 +198,9 @@ exports.updateEntry = async (req, res) => {
             productCategory, // Add product category
             productDetails // Add product details
         });
+
+        // Remove the old image from Cloudinary now that the new record exists
+        await destroyImage(oldImage);
 
         // Respond with the updated product data
         return res.status(200).json(Nproduct);
@@ -202,8 +224,13 @@ exports.deleteProduct = async (req, res) => {
             return res.status(404).json({ message: 'Product not found' });
         }
 
-        // Delete the product
+        const imageUrl = product.image;
+
+        // Delete the product from the database
         await Product.findByIdAndDelete(id);
+
+        // Remove the now-orphaned image from Cloudinary (best-effort)
+        await destroyImage(imageUrl);
         
         return res.status(200).json({ message: 'Product deleted successfully' });
     } catch (error) {

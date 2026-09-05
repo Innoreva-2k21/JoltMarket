@@ -40,6 +40,15 @@ app.get("/health", (req, res) => {
 app.use("/user", require("./Routes/user.routes"))
 app.use("/product", require("./Routes/product.routes"))
 
+// Global error handler (e.g. Multer file-size errors)
+app.use((err, req, res, next) => {
+  if (err && err.code === "LIMIT_FILE_SIZE") {
+    return res.status(413).json({ message: "Image is too large. Maximum size is 4 MB." })
+  }
+  console.error(err)
+  return res.status(500).json({ message: "Something went wrong." })
+})
+
 
 
 
