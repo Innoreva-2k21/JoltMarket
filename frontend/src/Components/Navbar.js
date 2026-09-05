@@ -78,6 +78,7 @@ const Navbar = ({ onLogout }) => {
           <button
             onClick={toggleDarkMode}
             className="text-lg text-white hover:text-gray-300"
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             {/* **Change: new toggle with icon added */}
             {darkMode ? (
@@ -93,6 +94,7 @@ const Navbar = ({ onLogout }) => {
           <button
             onClick={toggleDarkMode}
             className="text-lg text-white hover:text-gray-300"
+            aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             {/* **Change: new toggle with icon added */}
             {darkMode ? (
@@ -104,6 +106,8 @@ const Navbar = ({ onLogout }) => {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white focus:outline-none"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
           >
             <svg
               className="w-8 h-8"

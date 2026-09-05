@@ -14,6 +14,7 @@ function Update() {
   const [image, setImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldErrors, setFieldErrors] = useState({}); // Track errors for each field
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchProductById = async () => {
@@ -76,6 +77,8 @@ function Update() {
     formData.append('userEmail', userEmail);
     formData.append('id', id);
 
+    setSubmitting(true);
+
     try {
       const response = await fetch(apiUrl('/product/Update'), {
         method: 'POST',
@@ -92,6 +95,8 @@ function Update() {
     } catch (error) {
       console.error('Error updating product:', error);
       setErrorMessage('An error occurred while updating the product.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -176,18 +181,24 @@ function Update() {
           style={{ margin: '10px 0', padding: '10px', width: '80%' }}
         />
 
-        <button type="submit" style={{
-          padding: '15px',
-          fontSize: '1em',
-          color: 'white',
-          backgroundColor: '#4CAF50',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          marginTop: '20px',
-          transition: 'background-color 0.3s, transform 0.3s',
-        }}>
-          Update Product
+        <button
+          type="submit"
+          disabled={submitting}
+          aria-busy={submitting}
+          style={{
+            padding: '15px',
+            fontSize: '1em',
+            color: 'white',
+            backgroundColor: '#4CAF50',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            marginTop: '20px',
+            transition: 'background-color 0.3s, transform 0.3s',
+            opacity: submitting ? 0.6 : 1,
+          }}
+        >
+          {submitting ? 'Updating...' : 'Update Product'}
         </button>
       </form>
 

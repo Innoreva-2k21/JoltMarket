@@ -12,6 +12,8 @@ function Seller() {
   const [productImage, setProductImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [products, setProducts] = useState([]);
+  const [submitting, setSubmitting] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   const navigate = useNavigate(); // Create a navigate function for navigation
 
@@ -101,6 +103,8 @@ function Seller() {
     formData.append("userEmail", userEmail);
     formData.append("image", productImage);
 
+    setSubmitting(true);
+
     try {
       const response = await fetch(apiUrl("/product/create"), {
         method: "POST",
@@ -120,10 +124,13 @@ function Seller() {
       console.error("Error during fetch:", error);
       setErrorMessage("An error occurred while submitting the form.");
       toast.error("An error occurred while uploading the product");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const handleDelete = async (id) => {
+    setDeletingId(id);
     try {
       const response = await fetch(apiUrl(`/product/delete/${id}`), {
         method: "DELETE",
@@ -142,6 +149,8 @@ function Seller() {
       console.error("Error during delete:", error);
       setErrorMessage("An error occurred while deleting the product.");
       toast.error("An error occurred while deleting the product");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -229,6 +238,8 @@ function Seller() {
 
           <button
             type="submit"
+            disabled={submitting}
+            aria-busy={submitting}
             style={{
               padding: "15px",
               fontSize: "1em",
@@ -239,9 +250,9 @@ function Seller() {
               cursor: "pointer",
               transition: "background-color 0.3s, transform 0.3s",
             }}
-            className="bg-purple-700 dark:bg-blue-500"
+            className="bg-purple-700 dark:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit
+            {submitting ? "Uploading..." : "Submit"}
           </button>
         </form>
 
@@ -334,10 +345,12 @@ function Seller() {
                   Update
                 </button>
                 <button
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-60 disabled:cursor-not-allowed"
                   onClick={() => handleDelete(product._id)}
+                  disabled={deletingId !== null}
+                  aria-busy={deletingId === product._id}
                 >
-                  Delete
+                  {deletingId === product._id ? "Deleting..." : "Delete"}
                 </button>
               </div>
             </div>
